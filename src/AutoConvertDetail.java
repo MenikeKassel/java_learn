@@ -9,9 +9,12 @@ public class AutoConvertDetail {
         System.out.println(c2);
         short s = 12;
         char c = 'a';
-        int i = 15;
         double result = c;
-        System.out.println(result);
+        System.out.println(c+1);
+        int i = 2;
+        i = i++;//temp = i; i = i+1;i = temp
+        System.out.println("i:"+ i);
+
 
     }
 }
