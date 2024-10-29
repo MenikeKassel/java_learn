@@ -1,3 +1,5 @@
+package com.Exercise;
+
 public class MethodExercise {
     public static void main(String[] args){
         System.out.println("开始调用");

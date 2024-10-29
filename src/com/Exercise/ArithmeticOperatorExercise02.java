@@ -1,3 +1,5 @@
+package com.Exercise;
+
 public class ArithmeticOperatorExercise02 {
     public static void main(String[] args ){
         int week;

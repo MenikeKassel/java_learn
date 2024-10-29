@@ -1,3 +1,5 @@
+package com.Exercise;
+
 public class Chardetail {
     public static void main(String[] args){
         System.out.println("hello");
