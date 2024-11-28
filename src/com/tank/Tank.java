@@ -3,6 +3,24 @@ package com.tank;
 public class Tank {
     private int x;
     private int y;
+    private int direct;//坦克方向 0上 1右 2下 3左
+    private double speed;
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public int getDirect() {
+        return direct;
+    }
+
+    public void setDirect(int direct) {
+        this.direct = direct;
+    }
 
     public Tank(int x, int y) {
         this.x = x;
@@ -23,5 +41,18 @@ public class Tank {
 
     public void setY(int y) {
         this.y = y;
+    }
+    //将坦克移动写入方法
+    public void moveUp(){
+        y -= speed;
+    }
+    public void moveRight(){
+        x += speed;
+    }
+    public void moveLeft(){
+        x -= speed;
+    }
+    public void moveDown(){
+        y += speed;
     }
 }
