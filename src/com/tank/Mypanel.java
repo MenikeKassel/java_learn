@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 //绘图区
@@ -11,14 +13,31 @@ public class Mypanel extends JPanel implements KeyListener,Runnable {
     Hero hero = null;
     Vector<EnemyTank> enemyTanks = new Vector<>();
     int enemyTanksSize = 3;
+    private List<Shot> shots = new ArrayList<>();
+
+
     public Mypanel(){
         hero = new Hero(100,100);
         hero.setSpeed(10);
+
         for(int i = 0; i < enemyTanksSize; i++){
             EnemyTank enemyTank = new EnemyTank((100 * (i + 1)),0);
             enemyTank.setDirect(2);
+            Shot shot = new Shot(enemyTank.getX() + 20, enemyTank.getY() +60, enemyTank.getDirect());
+
+            enemyTank.shots.add(shot);
+            new Thread(shot).start();
+
             enemyTanks.add(enemyTank);
 
+        }
+        for (int i = 0; i < hero.shots.size(); i++) {
+            Shot shot = hero.shots.get(i);
+            if (shot != null) {
+
+            } else {
+                hero.shots.remove(shot);
+            }
         }
     }
 
@@ -30,14 +49,12 @@ public class Mypanel extends JPanel implements KeyListener,Runnable {
         //画出坦克
         drawTank(hero.getX(),hero.getY(), g,hero.getDirect(),0);
 
-        if(hero.shot != null && hero.shot.isLive == true){
-
-            g.draw3DRect(hero.shot.getX(), hero.shot.getY(),1,1,false);
-        }
-
+        //画出敌方坦克
         for (int i = 0; i < enemyTanksSize; i++) {
             EnemyTank enemyTank = enemyTanks.get(i);
             drawTank(enemyTank.getX(), enemyTank.getY(), g, enemyTank.getDirect(),1);
+
+
 
         }
 
@@ -97,6 +114,14 @@ public class Mypanel extends JPanel implements KeyListener,Runnable {
         }
     }
 
+    public void drawShots(Graphics g) {
+
+        //System.out.println("当前共有" + shots.size() +"颗子弹");
+        for (Shot shot : shots) {
+            g.setColor(Color.YELLOW);
+            g.draw3DRect(shot.getX(), shot.getY(),10,10,false);  // 绘制子弹
+        }
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {

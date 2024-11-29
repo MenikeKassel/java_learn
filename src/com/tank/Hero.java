@@ -1,7 +1,13 @@
 package com.tank;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 public class Hero extends Tank {
     Shot shot = null;
+    Vector<Shot> shots = new Vector<>();
+
     public Hero(int x, int y) {
         super(x, y);
     }
@@ -21,6 +27,11 @@ public class Hero extends Tank {
                 shot = new Shot(getX() , getY()+ 20, 3);
                 break;
         }
+        shots.add(shot);
         new Thread(shot).start();
+
     }
+
+
+
 }
